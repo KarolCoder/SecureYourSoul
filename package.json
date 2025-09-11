@@ -30,7 +30,8 @@
     "react": "~19.0.0",
     "react-dom": "~19.0.0",
     "react-native": "^0.79.2",
-    "react-native-bare-kit": "^0.8.1",
+    "react-native-b4a": "^0.0.0",
+    "react-native-bare-kit": "^0.9.1",
     "react-native-safe-area-context": "^5.4.0"
   },
   "devDependencies": {
