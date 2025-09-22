@@ -20,7 +20,6 @@
   "homepage": "https://github.com/holepunchto/bare-expo#readme",
   "dependencies": {
     "b4a": "^1.6.7",
-    "events": "^3.3.0",
     "expo": "^53.0.9",
     "expo-build-properties": "^0.14.6",
     "expo-constants": "^17.1.6",
