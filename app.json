@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Bare",
-    "slug": "bare-expo",
+    "name": "Secure Your Soul",
+    "slug": "secure-your-soul",
     "version": "1.0.0",
     "newArchEnabled": true,
     "orientation": "portrait",
@@ -15,17 +15,42 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "to.holepunch.bare.expo"
+      "bundleIdentifier": "to.holepunch.bare.expo",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to upload and share photos securely.",
+        "NSCameraUsageDescription": "This app needs access to your camera to take photos for sharing.",
+        "NSDocumentPickerUsageDescription": "This app needs access to your documents to upload and share files with your family."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "to.holepunch.bare.expo"
+      "package": "to.holepunch.bare.expo",
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "CAMERA",
+        "READ_MEDIA_IMAGES",
+        "READ_MEDIA_VIDEO",
+        "ACCESS_MEDIA_LOCATION",
+        "MANAGE_EXTERNAL_STORAGE"
+      ]
     },
     "plugins": [
       ["expo-router"],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "This app needs access to your photo library to upload and share photos securely.",
+          "cameraPermission": "This app needs access to your camera to take photos for sharing.",
+          "microphonePermission": false
+        }
+      ],
+      [
+        "expo-document-picker"
+      ],
       [
         "expo-build-properties",
         {

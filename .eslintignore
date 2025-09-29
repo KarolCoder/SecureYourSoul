@@ -1,0 +1,15 @@
+node_modules/
+.expo/
+dist/
+build/
+ios/
+android/
+*.bundle.js
+*.bundle.mjs
+app.bundle.mjs
+backend/
+Pods/
+*.generated.*
+*.config.js
+babel.config.js
+metro.config.js

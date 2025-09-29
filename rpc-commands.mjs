@@ -1,0 +1,11 @@
+export const RPC_RESET = 0
+export const RPC_MESSAGE = 1
+export const RPC_INVITE = 2
+export const RPC_CREATE_FOLDER = 3
+export const RPC_LIST_FOLDERS = 4
+export const RPC_GET_PEERS = 5
+export const RPC_GET_DRIVE_KEY = 6
+export const RPC_DELETE_FOLDER = 7
+export const RPC_UPLOAD_FILE = 8
+export const RPC_CLEAR_ALL = 9
+export const RPC_LOAD_ALL_DATA = 10
