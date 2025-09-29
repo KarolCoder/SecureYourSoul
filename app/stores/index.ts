@@ -28,7 +28,6 @@ export {
 } from './dataStore'
 export { useActionsStore, type UploadFileData } from './actionsStore'
 
-// Combined hook for backward compatibility during migration
 export const useWorklet = () => {
   const workletRPC = useWorkletRPC()
   const generatedKey = useGeneratedKey()
@@ -37,17 +36,14 @@ export const useWorklet = () => {
   const actions = useActionsStore()
 
   return {
-    // Connection state
     workletRPC,
     isWorkletStarted: isConnected,
     generatedKey,
     connectedWithExistingDrive:
       useConnectionStore.getState().connectedWithExistingDrive,
 
-    // Data
     dataList,
 
-    // Actions
     startWorklet: actions.startWorklet,
     createFolder: actions.createFolder,
     listFolders: actions.listFolders,

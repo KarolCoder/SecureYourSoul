@@ -115,8 +115,6 @@ function SettingsContent() {
           </StyledScrollView>
         </SafeAreaView>
       </BackgroundGradient>
-
-      {/* Screen-level modals */}
       <CustomAlert
         visible={alert.visible}
         title={alert.data?.title || ''}
@@ -136,6 +134,7 @@ export default function SettingsScreen() {
   )
 }
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     flex: 1

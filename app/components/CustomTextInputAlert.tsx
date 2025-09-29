@@ -9,6 +9,8 @@ import {
 import { StyledView, StyledText } from './styled'
 import { theme } from '../theme'
 
+// I'VE ADDED IT, BECAUSE THERE WAS ISSUES WITH ALERTS ON ANDROID, SO I DID IT AS A TEMPORARY SOLUTION
+
 const { width: screenWidth } = Dimensions.get('window')
 
 interface CustomTextInputAlertProps {
@@ -105,6 +107,7 @@ export const CustomTextInputAlert: React.FC<CustomTextInputAlertProps> = ({
   )
 }
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   overlay: {
     position: 'absolute',

@@ -1,5 +1,5 @@
-import React, { memo, useMemo } from 'react'
-import { StyleSheet, ActivityIndicator } from 'react-native'
+import React, { memo, useCallback } from 'react'
+import { StyleSheet } from 'react-native'
 import { FlashList } from '@shopify/flash-list'
 import { StyledView, StyledText } from '../styled'
 // Removed unused imports: Card, Button
@@ -12,24 +12,14 @@ type DriveEntry = ParsedDriveEntry
 
 interface FileListProps {
   folderFiles: DriveEntry[]
-  folderName: string
-  refreshing: boolean
-  onRefresh: () => void
   onOpenFolder?: (folderName: string) => void
   onDeleteFolder?: (folderName: string) => void
 }
 
 export const FileList = memo<FileListProps>(
-  ({
-    folderFiles,
-    folderName,
-    refreshing,
-    onRefresh,
-    onOpenFolder,
-    onDeleteFolder
-  }) => {
-    const renderItem = useMemo(() => {
-      const RenderItem = ({ item }: { item: DriveEntry }) => {
+  ({ folderFiles, onOpenFolder, onDeleteFolder }) => {
+    const renderItem = useCallback(
+      ({ item }: { item: DriveEntry }) => {
         if (item.isFolder) {
           return (
             <FolderItem
@@ -50,10 +40,9 @@ export const FileList = memo<FileListProps>(
           )
         }
         return <FileItem item={item} />
-      }
-      RenderItem.displayName = 'RenderFileItem'
-      return RenderItem
-    }, [onOpenFolder, onDeleteFolder])
+      },
+      [onOpenFolder, onDeleteFolder]
+    )
 
     if (folderFiles.length === 0) {
       return (
@@ -70,15 +59,6 @@ export const FileList = memo<FileListProps>(
 
     return (
       <StyledView style={styles.container}>
-        {refreshing && (
-          <StyledView style={styles.loadingContainer}>
-            <ActivityIndicator size='small' color='#b0d943' />
-            <StyledText style={styles.loadingText}>
-              Loading photos...
-            </StyledText>
-          </StyledView>
-        )}
-
         <FlashList
           data={folderFiles}
           renderItem={renderItem}
@@ -115,19 +95,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.colors.text.tertiary,
     textAlign: 'center'
-  },
-  loadingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
-    paddingVertical: 8
-  },
-  loadingText: {
-    fontSize: 14,
-    color: theme.colors.accent.primary,
-    marginLeft: 8,
-    fontWeight: '500'
   },
   listContainer: {
     padding: 8

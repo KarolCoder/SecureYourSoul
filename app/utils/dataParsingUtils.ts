@@ -20,7 +20,7 @@ export type RawDriveEntry = {
 export const parseDriveEntries = (
   rawEntries: RawDriveEntry[]
 ): ParsedDriveEntry[] => {
-  return rawEntries.map((entry, index) => {
+  return rawEntries.map((entry) => {
     let parsedContent = ''
     let parsedType = entry.type
     let isFolder = false
@@ -65,38 +65,27 @@ export const parseDriveEntries = (
   })
 }
 
-/**
- * Filters entries to show only folders
- */
 export const getFolders = (
   parsedEntries: ParsedDriveEntry[]
 ): ParsedDriveEntry[] => {
   return parsedEntries.filter((entry) => entry.isFolder)
 }
 
-/**
- * Filters entries to show only files
- */
 export const getFiles = (
   parsedEntries: ParsedDriveEntry[]
 ): ParsedDriveEntry[] => {
   return parsedEntries.filter((entry) => !entry.isFolder)
 }
 
-/**
- * Gets all items for a root folder (like "Fff" or "Qwd")
- */
 export const getItemsForRootFolder = (
   parsedEntries: ParsedDriveEntry[],
   folderName: string
 ): ParsedDriveEntry[] => {
   return parsedEntries.filter((entry) => {
-    // If it's a folder, check if it's a subfolder of the current root folder
     if (entry.isFolder) {
       return entry.filename && entry.filename.startsWith(`/${folderName}/`)
     }
 
-    // If it's a file, check if it's in the current root folder
     return (
       entry.filename &&
       entry.filename.startsWith(`/${folderName}/`) &&

@@ -57,6 +57,7 @@ export const OptionCard = memo<OptionCardProps>(
 
 OptionCard.displayName = 'OptionCard'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     gap: 10

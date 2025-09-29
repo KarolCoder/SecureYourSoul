@@ -64,10 +64,7 @@ export const useActionsStore = create<ActionsStore>()(
         // Clean up existing RPC connection if running
         if (connectionStore.workletRPC) {
           try {
-            const rpc = connectionStore.workletRPC as {
-              close?: () => void
-              destroy?: () => void
-            }
+            const rpc = connectionStore.workletRPC
             if (rpc.close && typeof rpc.close === 'function') {
               rpc.close()
             } else if (rpc.destroy && typeof rpc.destroy === 'function') {
@@ -89,11 +86,11 @@ export const useActionsStore = create<ActionsStore>()(
 
         const rpc = new RPC(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          IPC as any, // RPC library expects specific Duplex type
+          IPC as any,
           (req: { command: number; data: unknown }) => {
             const connectionStore = useConnectionStore.getState()
             const dataStore = useDataStore.getState()
-
+            // THOSE FUNCTION SHOULD BE MOVED TO SOME HANDLERS, SO IT WILL BE EASIER TO READ AND UNDERSTAND
             if (req.command === RPC_MESSAGE) {
               try {
                 const data = b4a.toString(req.data as Buffer)

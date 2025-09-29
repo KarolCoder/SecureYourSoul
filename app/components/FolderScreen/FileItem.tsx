@@ -3,7 +3,6 @@ import { Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { StyledView, StyledText } from '../styled'
 import { Button } from '../UI'
 import { useModal } from '../../contexts/ModalContext'
-// Removed unused import: copyItemToClipboard
 import { logger } from '../../utils/logger'
 import {
   getFileIcon,
@@ -42,6 +41,12 @@ export const FileItem = memo<FileItemProps>(({ item }) => {
     })
   }
 
+  const isImage =
+    isImageFile(item.filename || '') ||
+    item.type === 'image' ||
+    item.type === 'heic' ||
+    item.type === 'heif'
+
   return (
     <StyledView flex={1} padding={4}>
       <StyledView
@@ -51,11 +56,7 @@ export const FileItem = memo<FileItemProps>(({ item }) => {
         style={styles.itemContainer}
       >
         <StyledView flex={1} style={styles.contentContainer}>
-          {(isImageFile(item.filename || '') ||
-            item.type === 'image' ||
-            item.type === 'heic' ||
-            item.type === 'heif') &&
-          item.content ? (
+          {isImage && item.content ? (
             <TouchableOpacity
               onPress={handleView}
               activeOpacity={0.8}
@@ -117,6 +118,7 @@ export const FileItem = memo<FileItemProps>(({ item }) => {
 
 FileItem.displayName = 'FileItem'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'column',

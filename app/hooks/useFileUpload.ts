@@ -1,6 +1,5 @@
 import { useCallback } from 'react'
 import { Alert } from 'react-native'
-import * as DocumentPicker from 'expo-document-picker'
 import * as ImagePicker from 'expo-image-picker'
 import { useWorklet } from '../stores'
 import { logger } from '../utils/logger'
@@ -142,68 +141,6 @@ export const useFileUpload = (folderName: string) => {
     [folderName, uploadFileAction]
   )
 
-  const pickPdf = useCallback(async () => {
-    try {
-      const result = await DocumentPicker.getDocumentAsync({
-        type: 'application/pdf',
-        copyToCacheDirectory: true,
-        multiple: true
-      })
-
-      if (!result.canceled) {
-        for (const asset of result.assets) {
-          try {
-            // Read file as base64
-            const response = await fetch(asset.uri)
-            if (!response.ok) {
-              throw new Error(`Failed to fetch file: ${response.statusText}`)
-            }
-            const blob = await response.blob()
-            const reader = new FileReader()
-
-            reader.onload = () => {
-              try {
-                const base64 = reader.result as string
-                const fileName = asset.name || `document_${Date.now()}.pdf`
-                const fileExtension = fileName.split('.').pop()?.toLowerCase()
-                const isPdfFile = fileExtension === 'pdf'
-
-                const uploadData = {
-                  folderName: folderName || '',
-                  fileName: fileName,
-                  fileData: base64.split(',')[1], // Remove data:type;base64, prefix
-                  fileType: isPdfFile ? 'pdf' : 'document'
-                }
-                uploadFileAction(uploadData)
-              } catch (uploadError) {
-                logger.error('Error processing PDF upload:', uploadError)
-                Alert.alert('Error', `Failed to process PDF: ${asset.name}`)
-              }
-            }
-
-            reader.onerror = () => {
-              logger.error('FileReader error for PDF:', asset.name)
-              Alert.alert('Error', `Failed to read PDF: ${asset.name}`)
-            }
-
-            reader.readAsDataURL(blob)
-          } catch (assetError) {
-            logger.error('Error processing PDF asset:', assetError)
-            Alert.alert('Error', `Failed to process PDF: ${asset.name}`)
-          }
-        }
-
-        Alert.alert(
-          'Success',
-          `${result.assets.length} PDFs uploaded to ${folderName}`
-        )
-      }
-    } catch (error) {
-      logger.error('Error picking PDFs:', error)
-      Alert.alert('Error', 'Failed to pick PDFs')
-    }
-  }, [folderName, uploadFileAction])
-
   // Funkcje z różnymi poziomami jakości
   const pickImageHighQuality = useCallback(() => pickImage(0.8), [pickImage])
   const pickImageMediumQuality = useCallback(() => pickImage(0.6), [pickImage])
@@ -213,7 +150,6 @@ export const useFileUpload = (folderName: string) => {
     pickImage,
     pickImageHighQuality,
     pickImageMediumQuality,
-    pickImageLowQuality,
-    pickPdf
+    pickImageLowQuality
   }
 }

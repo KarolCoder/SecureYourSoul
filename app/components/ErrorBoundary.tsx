@@ -4,6 +4,7 @@ import { Button } from './UI'
 import { logger } from '../utils/logger'
 import { theme } from '../theme'
 
+//I'VE ADDED IT, BECAUSE I DON'T WANT JUST TO CRASH THE APP FOR THE USERS
 interface Props {
   children: ReactNode
   fallback?: ReactNode
@@ -69,6 +70,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 }
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     flex: 1,

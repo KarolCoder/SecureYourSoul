@@ -1,8 +1,4 @@
-// Utility functions for file operations
-
-// File extension to icon mapping - only images and PDFs
 const FILE_EXTENSION_TO_ICON: Record<string, string> = {
-  // Images
   jpg: '🖼️',
   jpeg: '🖼️',
   png: '🖼️',
@@ -16,9 +12,6 @@ const FILE_EXTENSION_TO_ICON: Record<string, string> = {
   heic: '🖼️',
   heif: '🖼️',
 
-  // PDF Documents
-  pdf: '📄',
-
   // Default
   default: '📁'
 }
@@ -26,7 +19,6 @@ const FILE_EXTENSION_TO_ICON: Record<string, string> = {
 // File type categories - only images and PDFs
 export const FILE_TYPE_CATEGORIES = {
   IMAGE: 'image',
-  PDF: 'pdf',
   OTHER: 'other'
 } as const
 
@@ -44,10 +36,7 @@ const FILE_EXTENSION_TO_CATEGORY: Record<string, string> = {
   tiff: FILE_TYPE_CATEGORIES.IMAGE,
   tif: FILE_TYPE_CATEGORIES.IMAGE,
   heic: FILE_TYPE_CATEGORIES.IMAGE,
-  heif: FILE_TYPE_CATEGORIES.IMAGE,
-
-  // PDF Documents
-  pdf: FILE_TYPE_CATEGORIES.PDF
+  heif: FILE_TYPE_CATEGORIES.IMAGE
 }
 
 export const getFileIcon = (filename: string): string => {
@@ -64,13 +53,11 @@ export const isImageFile = (filename: string): boolean => {
   return getFileCategory(filename) === FILE_TYPE_CATEGORIES.IMAGE
 }
 
-// Utility function to get file type display name - only images and PDFs
 export const getFileTypeDisplayName = (fileType: string | unknown): string => {
   const TYPE_DISPLAY_NAMES: Record<string, string> = {
     image: 'Image',
     heic: 'HEIC Image',
     heif: 'HEIF Image',
-    pdf: 'PDF',
     other: 'File'
   }
 

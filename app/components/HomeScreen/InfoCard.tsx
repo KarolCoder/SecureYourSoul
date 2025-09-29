@@ -40,6 +40,7 @@ export const InfoCard = memo<InfoCardProps>(({ icon, title, text }) => {
 
 InfoCard.displayName = 'InfoCard'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',

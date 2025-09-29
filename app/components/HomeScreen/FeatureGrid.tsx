@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { Dimensions, StyleSheet } from 'react-native'
 import { StyledView, StyledText } from '../styled'
-// Removed unused import: theme
 
 const { width } = Dimensions.get('window')
 
@@ -44,6 +43,7 @@ export const FeatureGrid = memo<FeatureGridProps>(({ features }) => {
 
 FeatureGrid.displayName = 'FeatureGrid'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   featureItem: {
     alignItems: 'center',

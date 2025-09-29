@@ -29,6 +29,7 @@ export const UploadSection = memo<UploadSectionProps>(({ folderName }) => {
 
 UploadSection.displayName = 'UploadSection'
 
+// IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,

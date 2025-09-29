@@ -15,6 +15,8 @@ import { useModal } from '../contexts/ModalContext'
 import { theme } from '../theme'
 import { logger } from '../utils/logger'
 
+//I'VE ADDED IT, BECAUSE THERE WAS ISSUES WITH MODALS ON ANDROID, SO I DID IT AS A TEMPORARY SOLUTION
+
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
 interface SimpleImageModalProps {
@@ -34,7 +36,9 @@ export const SimpleImageModal: React.FC<SimpleImageModalProps> = ({
   const { showAlert } = useModal()
 
   const handleDownload = async () => {
-    if (!imageUri) return
+    if (!imageUri) {
+      return
+    }
 
     try {
       setIsDownloading(true)
@@ -84,7 +88,9 @@ export const SimpleImageModal: React.FC<SimpleImageModalProps> = ({
     }
   }
 
-  if (!visible) return null
+  if (!visible) {
+    return null
+  }
 
   if (!imageUri) {
     return (
@@ -106,13 +112,10 @@ export const SimpleImageModal: React.FC<SimpleImageModalProps> = ({
   return (
     <>
       <StatusBar barStyle='light-content' backgroundColor='rgba(0,0,0,0.95)' />
-
       <StyledView style={styles.overlay}>
         <TouchableWithoutFeedback onPress={onClose}>
           <StyledView style={styles.backdrop} />
         </TouchableWithoutFeedback>
-
-        {/* Header with controls */}
         <StyledView style={styles.header}>
           <TouchableOpacity style={styles.headerButton} onPress={onClose}>
             <StyledText style={styles.headerButtonText}>✕ Close</StyledText>
@@ -134,8 +137,6 @@ export const SimpleImageModal: React.FC<SimpleImageModalProps> = ({
             </StyledText>
           </TouchableOpacity>
         </StyledView>
-
-        {/* Scrollable image container with zoom */}
         <ScrollView
           style={styles.scrollContainer}
           contentContainerStyle={styles.scrollContent}
@@ -162,6 +163,7 @@ export const SimpleImageModal: React.FC<SimpleImageModalProps> = ({
   )
 }
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   overlay: {
     position: 'absolute',

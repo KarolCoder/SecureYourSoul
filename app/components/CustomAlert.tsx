@@ -8,17 +8,19 @@ import {
 import { StyledView, StyledText } from './styled'
 import { theme } from '../theme'
 
+// I'VE ADDED IT, BECAUSE THERE WAS ISSUES WITH ALERTS ON ANDROID, SO I DID IT AS A TEMPORARY SOLUTION
+
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window')
 
 interface CustomAlertProps {
   visible: boolean
   title: string
   message: string
-  buttons?: Array<{
+  buttons?: {
     text: string
     onPress: () => void
     style?: 'default' | 'cancel' | 'destructive'
-  }>
+  }[]
   onBackdropPress?: () => void
 }
 
@@ -29,7 +31,9 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
   buttons = [{ text: 'OK', onPress: () => {} }],
   onBackdropPress
 }) => {
-  if (!visible) return null
+  if (!visible) {
+    return null
+  }
 
   const handleBackdropPress = () => {
     if (onBackdropPress) {
@@ -79,6 +83,7 @@ export const CustomAlert: React.FC<CustomAlertProps> = ({
   )
 }
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   overlay: {
     position: 'absolute',

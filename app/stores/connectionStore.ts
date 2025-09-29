@@ -2,10 +2,8 @@ import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { logger } from '../utils/logger'
 
-// Types
 type ConnectionState = 'disconnected' | 'connecting' | 'connected' | 'error'
 
-// Types for RPC
 type RPCInstance = {
   request: (command: number) => {
     send: (data: string) => void
@@ -15,26 +13,21 @@ type RPCInstance = {
 }
 
 interface ConnectionStore {
-  // State
   state: ConnectionState
   workletRPC: RPCInstance | null
   generatedKey: string
   connectedWithExistingDrive: boolean
 
-  // Actions
   setState: (state: ConnectionState) => void
   setWorkletRPC: (rpc: RPCInstance | null) => void
   setGeneratedKey: (key: string) => void
   setConnectedWithExistingDrive: (connected: boolean) => void
-
-  // Computed
   isConnected: () => boolean
   isConnecting: () => boolean
 }
 
 export const useConnectionStore = create<ConnectionStore>()(
   subscribeWithSelector((set, get) => ({
-    // Initial state
     state: 'disconnected',
     workletRPC: null,
     generatedKey: '',
@@ -63,7 +56,6 @@ export const useConnectionStore = create<ConnectionStore>()(
       set({ connectedWithExistingDrive })
     },
 
-    // Computed
     isConnected: () => get().state === 'connected',
     isConnecting: () => get().state === 'connecting'
   }))

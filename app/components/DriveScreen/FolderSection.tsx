@@ -10,17 +10,10 @@ interface FolderSectionProps {
   onCreateFolder: (folderName: string) => void
   isCreating?: boolean
   onClearAll?: () => void
-  onStartWorklet?: () => void
 }
 
 export const FolderSection = memo<FolderSectionProps>(
-  ({
-    isWorkletStarted,
-    onCreateFolder,
-    isCreating = false,
-    onClearAll,
-    onStartWorklet
-  }) => {
+  ({ isWorkletStarted, onCreateFolder, isCreating = false, onClearAll }) => {
     const { showTextInputAlert, hideTextInputAlert } = useModal()
 
     const handleCreateFolder = () => {
@@ -57,7 +50,7 @@ export const FolderSection = memo<FolderSectionProps>(
           />
         </StyledView>
 
-        {onClearAll && (
+        {!!onClearAll && (
           <StyledView style={styles.dangerSection}>
             <Button
               title='Clear All Data'
@@ -75,6 +68,7 @@ export const FolderSection = memo<FolderSectionProps>(
 
 FolderSection.displayName = 'FolderSection'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,

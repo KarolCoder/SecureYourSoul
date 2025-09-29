@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
@@ -11,10 +11,14 @@ import { OptionCard } from './components/HomeScreen/OptionCard'
 import { FeatureGrid } from './components/HomeScreen/FeatureGrid'
 import { InfoCard } from './components/HomeScreen/InfoCard'
 
+const features = [
+  { icon: '📷', text: 'Secure Photos' },
+  { icon: '🔒', text: 'Private & Safe' }
+]
+
 export default function HomeScreen() {
   const { startWorklet, isWorkletStarted } = useWorklet()
 
-  // Automatically navigate to drive when worklet starts
   useEffect(() => {
     if (isWorkletStarted) {
       router.replace('/drive')
@@ -32,15 +36,6 @@ export default function HomeScreen() {
       logger.error('Error starting worklet:', _error)
     }
   }, [startWorklet])
-
-  // Memoize features array to prevent recreation on every render
-  const features = useMemo(
-    () => [
-      { icon: '📷', text: 'Secure Photos' },
-      { icon: '🔒', text: 'Private & Safe' }
-    ],
-    []
-  )
 
   return (
     <BackgroundGradient>

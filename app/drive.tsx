@@ -52,15 +52,12 @@ function DriveContent() {
     }
   }, [listFolders, showAlert])
 
-  // Auto-load folders on start
   useEffect(() => {
     if (isWorkletStarted) {
-      const timer = setTimeout(() => {
-        handleListFolders()
-      }, 100)
-      return () => clearTimeout(timer)
+      handleListFolders()
     }
-  }, [isWorkletStarted, handleListFolders])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isWorkletStarted])
 
   const handleDeleteFolder = useCallback(
     (folderName: string) => {
@@ -177,7 +174,6 @@ function DriveContent() {
                 />
               </StyledView>
             </StyledView>
-
             <FolderSection
               isWorkletStarted={isWorkletStarted}
               onCreateFolder={createFolder}
@@ -185,15 +181,12 @@ function DriveContent() {
             />
             <FolderList
               dataList={dataList}
-              onRefresh={onRefresh}
               onOpenFolder={openFolder}
               onDeleteFolder={handleDeleteFolder}
             />
           </StyledScrollView>
         </SafeAreaView>
       </BackgroundGradient>
-
-      {/* Screen-level modals */}
       <CustomAlert
         visible={alert.visible}
         title={alert.data?.title || ''}
@@ -201,7 +194,6 @@ function DriveContent() {
         buttons={alert.data?.buttons || [{ text: 'OK', onPress: hideAlert }]}
         onBackdropPress={hideAlert}
       />
-
       <CustomTextInputAlert
         visible={textInputAlert.visible}
         title={textInputAlert.data?.title || ''}

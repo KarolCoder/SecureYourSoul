@@ -94,6 +94,7 @@ export const ShareSection = memo<ShareSectionProps>(
 
 ShareSection.displayName = 'ShareSection'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',

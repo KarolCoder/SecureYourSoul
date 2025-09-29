@@ -1,8 +1,7 @@
-import React, { memo, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import { StyleSheet } from 'react-native'
 import { FlashList } from '@shopify/flash-list'
 import { StyledView, StyledText } from '../styled'
-// Removed unused imports: Card, Button
 import { FolderItem } from './FolderItem'
 import { theme } from '../../theme'
 import {
@@ -14,30 +13,30 @@ import {
 
 type DriveEntry = RawDriveEntry
 
+//IT SHOULD HAS BETTER KEY EXTRACTOR
+const keyExtractor = (_: unknown, index: number) => index.toString()
+
 interface FolderListProps {
   dataList: DriveEntry[]
-  onRefresh: () => void
   onOpenFolder: (folderName: string) => void
   onDeleteFolder: (folderName: string) => void
 }
 
 export const FolderList = memo<FolderListProps>(
-  ({ dataList, onRefresh, onOpenFolder, onDeleteFolder }) => {
-    // Parse the raw data to extract proper content
+  ({ dataList, onOpenFolder, onDeleteFolder }) => {
     const parsedEntries = useMemo(() => parseDriveEntries(dataList), [dataList])
     const folders = useMemo(() => getFolders(parsedEntries), [parsedEntries])
 
-    const renderFolderItem = useMemo(() => {
-      const RenderItem = ({ item }: { item: ParsedDriveEntry }) => (
+    const renderFolderItem = useCallback(
+      ({ item }: { item: ParsedDriveEntry }) => (
         <FolderItem
           item={item}
           onOpenFolder={onOpenFolder}
           onDeleteFolder={onDeleteFolder}
         />
-      )
-      RenderItem.displayName = 'RenderFolderItem'
-      return RenderItem
-    }, [onOpenFolder, onDeleteFolder])
+      ),
+      [onOpenFolder, onDeleteFolder]
+    )
 
     if (folders.length === 0) {
       return null
@@ -52,7 +51,7 @@ export const FolderList = memo<FolderListProps>(
         <FlashList
           data={folders}
           renderItem={renderFolderItem}
-          keyExtractor={(_, index) => index.toString()}
+          keyExtractor={keyExtractor}
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false}
         />
@@ -63,6 +62,7 @@ export const FolderList = memo<FolderListProps>(
 
 FolderList.displayName = 'FolderList'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.background.primary,

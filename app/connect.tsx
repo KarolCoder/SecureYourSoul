@@ -20,16 +20,8 @@ export default function ConnectScreen() {
   const [error, setError] = useState('')
   const { startWorklet, connectedWithExistingDrive } = useWorklet()
 
-  // useEffect(() => {
-  //   // If worklet is already started, we're connected
-  //   if (isWorkletStarted) {
-  //     setIsConnecting(false)
-  //   }
-  // }, [isWorkletStarted])
-
   useEffect(() => {
     if (connectedWithExistingDrive) {
-      // setIsConnecting(false)
       router.replace('/drive')
     }
   }, [connectedWithExistingDrive])
@@ -128,6 +120,7 @@ export default function ConnectScreen() {
   )
 }
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     flex: 1

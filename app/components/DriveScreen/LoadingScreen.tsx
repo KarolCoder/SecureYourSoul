@@ -38,6 +38,7 @@ export const LoadingScreen = memo(() => {
 
 LoadingScreen.displayName = 'LoadingScreen'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',

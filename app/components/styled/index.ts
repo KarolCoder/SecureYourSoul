@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 import { theme } from '../../theme'
 
-// Base styled components
+//THOSE COMPONENTS SHOULD BE MOVED TO DIFFERENT FOLDERS, I DIDN'T HAVE TIME TO DO IT, ALSO NOT EVERY PROPS ARE NECESSARY
+
 interface StyledViewProps {
   flex?: number
   backgroundColor?: string
@@ -64,7 +65,6 @@ export const StyledScrollView = styled.ScrollView<StyledScrollViewProps>`
   flex: ${(props: StyledScrollViewProps) => props.flex || 1};
 `
 
-// Card components
 interface CardProps {
   padding?: number
   margin?: number
@@ -92,7 +92,6 @@ export const Card = styled.View<CardProps>`
   ${theme.shadows.md}
 `
 
-// Button variant and size mappings
 const BUTTON_VARIANT_STYLES = {
   primary: `background-color: ${theme.colors.primary};`,
   secondary: `background-color: ${theme.colors.secondary};`,
@@ -126,7 +125,6 @@ export const ButtonContainer = styled.TouchableOpacity<ButtonContainerProps>`
   ${theme.shadows.md}
 `
 
-// Button text variant and size mappings
 const BUTTON_TEXT_VARIANT_STYLES = {
   primary: `color: ${theme.colors.text.inverse};`,
   secondary: `color: ${theme.colors.text.primary};`,
@@ -216,7 +214,6 @@ export const HeaderSubtitle = styled.Text`
   theme.typography.fontSizes.md}px;
 `
 
-// Loading components
 interface LoadingContainerProps {
   size?: number
 }

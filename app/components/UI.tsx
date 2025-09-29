@@ -15,12 +15,10 @@ import {
   InputError,
   HeaderContainer,
   HeaderTitle,
-  HeaderSubtitle,
-  LoadingContainer,
-  LoadingText
+  HeaderSubtitle
 } from './styled'
 
-// Button Component
+//THOSE COMPONENTS SHOULD BE MOVED TO DIFFERENT FOLDERS, I DIDN'T HAVE TIME TO DO IT
 interface ButtonProps extends TouchableOpacityProps {
   title: string
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost' | 'ghostNoBorder'
@@ -66,7 +64,6 @@ export const Button = memo<ButtonProps>(
 
 Button.displayName = 'Button'
 
-// Card Component
 interface CardProps {
   children: React.ReactNode
   style?: ViewStyle
@@ -190,6 +187,7 @@ export const Header = memo<HeaderProps>(
 
 Header.displayName = 'Header'
 
+//IT SHOULD BE MOVED TO A STYLED COMPONENTS
 const styles = StyleSheet.create({
   backButton: {
     position: 'absolute',

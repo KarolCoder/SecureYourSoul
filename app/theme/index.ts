@@ -1,49 +1,47 @@
+//I'VE ADDED IT, SO IT IS EASIER TO CHANGE THE THEMES ACROSS THE APP
+
 export const theme = {
   colors: {
-    primary: '#8b5cf6', // Mystic purple
-    secondary: '#06b6d4', // Cyan
-    danger: '#ef4444', // Red
-    success: '#10b981', // Emerald
-    warning: '#f59e0b', // Amber
-    info: '#3b82f6', // Blue
-    error: '#ef4444', // Red
+    primary: '#8b5cf6',
+    secondary: '#06b6d4',
+    danger: '#ef4444',
+    success: '#10b981',
+    warning: '#f59e0b',
+    info: '#3b82f6',
+    error: '#ef4444',
 
-    // Background colors - mystical with gradients
     background: {
-      primary: '#0a0a0a', // Very dark base
-      secondary: '#0f0f0f', // Very dark gray
-      tertiary: '#1a1a1a', // Dark gray
-      card: 'rgba(15, 15, 15, 0.8)', // Semi-transparent dark
-      overlay: 'rgba(0, 0, 0, 0.8)', // Darker overlay
+      primary: '#0a0a0a',
+      secondary: '#0f0f0f',
+      tertiary: '#1a1a1a',
+      card: 'rgba(15, 15, 15, 0.8)',
+      overlay: 'rgba(0, 0, 0, 0.8)',
       gradient: {
-        start: '#0a0a0a', // Very dark
-        middle: '#1a0a2e', // Dark purple
-        end: '#16213e' // Dark blue-purple
+        start: '#0a0a0a',
+        middle: '#1a0a2e',
+        end: '#16213e'
       }
     },
 
-    // Text colors - more mystical
     text: {
-      primary: '#f8fafc', // Almost white
-      secondary: '#cbd5e1', // Light gray
-      tertiary: '#94a3b8', // Medium gray
-      disabled: '#64748b', // Dark gray
-      inverse: '#000000', // Black
-      muted: '#64748b' // Dark gray
+      primary: '#f8fafc',
+      secondary: '#cbd5e1',
+      tertiary: '#94a3b8',
+      disabled: '#64748b',
+      inverse: '#000000',
+      muted: '#64748b'
     },
 
-    // Accent colors - mystical purple and cyan
     accent: {
-      primary: '#8b5cf6', // Mystic purple
-      secondary: '#06b6d4' // Cyan
+      primary: '#8b5cf6',
+      secondary: '#06b6d4'
     },
 
-    // Border colors - subtle, mystical
     border: {
-      primary: '#1e293b', // Dark slate
-      secondary: '#334155', // Slate
-      accent: '#8b5cf6', // Mystic purple
-      error: '#ef4444' // Red
+      primary: '#1e293b',
+      secondary: '#334155',
+      accent: '#8b5cf6',
+      error: '#ef4444'
     }
   },
 
@@ -92,21 +90,21 @@ export const theme = {
 
   shadows: {
     sm: {
-      shadowColor: '#8b5cf6', // Mystic purple glow
+      shadowColor: '#8b5cf6',
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.2,
       shadowRadius: 3,
       elevation: 2
     },
     md: {
-      shadowColor: '#8b5cf6', // Mystic purple glow
+      shadowColor: '#8b5cf6',
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.3,
       shadowRadius: 6,
       elevation: 3
     },
     lg: {
-      shadowColor: '#8b5cf6', // Mystic purple glow
+      shadowColor: '#8b5cf6',
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.4,
       shadowRadius: 12,

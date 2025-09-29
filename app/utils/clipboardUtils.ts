@@ -1,4 +1,3 @@
-// Utility functions for clipboard operations
 import { Alert } from 'react-native'
 import Clipboard from '@react-native-clipboard/clipboard'
 

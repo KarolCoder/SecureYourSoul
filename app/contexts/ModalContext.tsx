@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
+//THERE SHOULD BE A SEPARATE CONTEXT FOR MODALS AND ALERTS, I'VE ADDED IT SO IT IS EASIER TO PASS A PROPS ACROSS COMPONENTS
+
 interface ImageModalData {
   imageUri: string
   filename?: string
@@ -8,11 +10,11 @@ interface ImageModalData {
 interface AlertData {
   title: string
   message: string
-  buttons?: Array<{
+  buttons?: {
     text: string
     onPress: () => void
     style?: 'default' | 'cancel' | 'destructive'
-  }>
+  }[]
 }
 
 interface TextInputAlertData {
