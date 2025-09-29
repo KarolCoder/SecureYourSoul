@@ -10,7 +10,6 @@ import {
   RPC_INVITE,
   RPC_CREATE_FOLDER,
   RPC_LIST_FOLDERS,
-  RPC_GET_PEERS,
   RPC_GET_DRIVE_KEY,
   RPC_DELETE_FOLDER,
   RPC_UPLOAD_FILE,
@@ -23,6 +22,8 @@ import Corestore from 'corestore'
 import Hyperswarm from 'hyperswarm'
 import b4a from 'b4a'
 const { IPC } = BareKit
+
+//BACKEND LOOKS LIKE SHIT, IT SHOULD BE REWRITTEN, AND MOVED TO A MANY FOLDERS TO MAKE IT MORE READABLE AND MAINTAINABLE
 
 const path = join(URL.fileURLToPath(Bare.argv[0]), 'hyperdrive-example')
 
@@ -86,65 +87,6 @@ const rpc = new RPC(IPC, async (req, error) => {
     await loadAllData()
   }
 
-  if (req.command === RPC_GET_PEERS) {
-    console.log('👥 Getting peer information...')
-    if (!driveInstance || !swarm) {
-      console.error('❌ Drive or swarm not ready yet')
-      return
-    }
-    try {
-      // Get peer information from hyperswarm
-      let peers = []
-
-      // Check if swarm.peers exists and is iterable
-      if (swarm.peers) {
-        if (Array.isArray(swarm.peers)) {
-          peers = swarm.peers
-        } else if (typeof swarm.peers[Symbol.iterator] === 'function') {
-          // Convert iterator to array
-          peers = Array.from(swarm.peers)
-        } else if (typeof swarm.peers === 'object') {
-          // Convert object to array
-          peers = Object.values(swarm.peers)
-        }
-      }
-
-      const peerCount = peers.length
-
-      console.log('👥 Found peers:', peerCount)
-      console.log('👥 Peers type:', typeof swarm.peers)
-      console.log('👥 Peers is array:', Array.isArray(swarm.peers))
-
-      if (peerCount > 0) {
-        console.log(
-          '👥 Peer details:',
-          peers.map((p) => ({
-            remoteAddress: p.remoteAddress,
-            remotePublicKey: p.remotePublicKey
-              ? p.remotePublicKey.toString('hex').substring(0, 10) + '...'
-              : 'unknown'
-          }))
-        )
-      }
-
-      // Send peer information to UI
-      const req = rpc.request(RPC_GET_PEERS)
-      req.send(
-        JSON.stringify({
-          peerCount: peerCount,
-          peers: peers.map((p) => ({
-            address: p.remoteAddress,
-            publicKey: p.remotePublicKey
-              ? p.remotePublicKey.toString('hex')
-              : null
-          }))
-        })
-      )
-    } catch (error) {
-      console.error('❌ Error getting peers:', error.message)
-    }
-  }
-
   if (req.command === RPC_GET_DRIVE_KEY) {
     console.log('🔑 Getting drive key...')
     if (!driveInstance) {
@@ -203,6 +145,7 @@ const rpc = new RPC(IPC, async (req, error) => {
     }
   }
 
+  //THIS FUNCTION IS VERY BAD, IT IS NOT OPTIMIZED FOR PERFORMANCE
   if (req.command === RPC_UPLOAD_FILE) {
     try {
       const uploadData = JSON.parse(b4a.toString(req.data))
@@ -700,6 +643,7 @@ if (!driveKey || driveKey.trim() === '') {
 }
 
 // Watch for changes in the drive
+// IT IS ALSO A SHIT RIGHT NOW, IT CLEAR UI AND THEN LOAD ALL DATA AGAIN, IT IS NOT OPTIMIZED FOR PERFORMANCE
 console.log('👀 Starting to watch drive for changes...')
 const watcher = drive.watch('/')
 for await (const [current, previous] of watcher) {

@@ -15,15 +15,12 @@ import {
   RPC_INVITE,
   RPC_CREATE_FOLDER,
   RPC_LIST_FOLDERS,
-  RPC_GET_PEERS,
   RPC_GET_DRIVE_KEY,
   RPC_DELETE_FOLDER,
   RPC_UPLOAD_FILE,
   RPC_CLEAR_ALL,
   RPC_LOAD_ALL_DATA
 } from '../../rpc-commands.mjs'
-
-// Types for RPC and Worklet
 
 type RPCInstance = {
   request: (command: number) => {
@@ -33,7 +30,6 @@ type RPCInstance = {
   destroy?: () => void
 }
 
-// Types
 export type UploadFileData = {
   folderName: string
   fileName: string
@@ -42,11 +38,9 @@ export type UploadFileData = {
 }
 
 interface ActionsStore {
-  // Actions
   startWorklet: (key?: string) => Promise<void>
   createFolder: (folderName: string) => Promise<void>
   listFolders: () => Promise<void>
-  getPeers: () => Promise<void>
   getDriveKey: () => Promise<string | null>
   deleteFolder: (folderName: string) => Promise<void>
   uploadFile: (uploadData: UploadFileData) => Promise<void>
@@ -279,28 +273,6 @@ export const useActionsStore = create<ActionsStore>()(
       } catch (error) {
         logger.error('Error listing folders:', error)
         Alert.alert('Error', 'Failed to list folders. Please try again.')
-      }
-    },
-
-    getPeers: async () => {
-      const connectionStore = useConnectionStore.getState()
-
-      if (!connectionStore.workletRPC) {
-        logger.error('Worklet RPC not available for getting peers')
-        Alert.alert('Error', 'Connection not ready. Please try again.')
-        return
-      }
-
-      try {
-        const rpc = connectionStore.workletRPC as RPCInstance
-        const req = rpc.request(RPC_GET_PEERS)
-        req.send('')
-      } catch (error) {
-        logger.error('Error getting peers:', error)
-        Alert.alert(
-          'Error',
-          'Failed to get peer information. Please try again.'
-        )
       }
     },
 

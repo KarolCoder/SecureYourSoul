@@ -47,7 +47,6 @@ export const useWorklet = () => {
     startWorklet: actions.startWorklet,
     createFolder: actions.createFolder,
     listFolders: actions.listFolders,
-    getPeers: actions.getPeers,
     getDriveKey: actions.getDriveKey,
     deleteFolder: actions.deleteFolder,
     uploadFile: actions.uploadFile,
